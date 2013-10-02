@@ -1,0 +1,159 @@
+
+国家气象局提供的天气预报接口
+
+接口地址：
+
+http://www.weather.com.cn/data/sk/101010100.html
+
+http://www.weather.com.cn/data/cityinfo/101010100.html
+
+http://m.weather.com.cn/data/101010100.html
+
+ 
+
+对于第三个接口，返回信息比较全面，也是以json格式提供，格式如下
+
+{"weatherinfo": {
+ //基本信息;
+ "city":"北京","city_en":"beijing",
+ "date_y":"2012年2月16日", "date":"", "week":"星期四", "fchh":"11", "cityid":"101010100",
+ //摄氏温度
+ "temp1":"2℃~-7℃",
+ "temp2":"1℃~-7℃",
+ "temp3":"4℃~-7℃",
+ "temp4":"7℃~-5℃",
+ "temp5":"5℃~-3℃",
+ "temp6":"5℃~-2℃",
+ //华氏温度;
+ "tempF1":"35.6ㄈ~19.4ㄈ",
+ "tempF2":"33.8ㄈ~19.4ㄈ",
+ "tempF3":"39.2ㄈ~19.4ㄈ",
+ "tempF4":"44.6ㄈ~23ㄈ",
+ "tempF5":"41ㄈ~26.6ㄈ",
+ "tempF6":"41ㄈ~28.4ㄈ",
+ //天气描述;
+ "weather1":"晴",
+ "weather2":"晴",
+ "weather3":"晴",
+ "weather4":"晴转多云",
+ "weather5":"多云",
+ "weather6":"多云转阴",
+ //天气描述图片序号
+ "img1":"0",
+ "img2":"99",
+ "img3":"0",
+ "img4":"99",
+ "img5":"0",
+ "img6":"99",
+ "img7":"0",
+ "img8":"1",
+ "img9":"1",
+ "img10":"99",
+ "img11":"1",
+ "img12":"2",
+ "img_single":"0",
+ //图片名称;
+ "img_title1":"晴",
+ "img_title2":"晴",
+ "img_title3":"晴",
+ "img_title4":"晴",
+ "img_title5":"晴",
+ "img_title6":"晴",
+ "img_title7":"晴",
+ "img_title8":"多云",
+ "img_title9":"多云",
+ "img_title10":"多云",
+ "img_title11":"多云",
+ "img_title12":"阴",
+ "img_title_single":"晴",
+ //风速描述
+ "wind1":"北风3-4级转微风",
+ "wind2":"微风",
+ "wind3":"微风",
+ "wind4":"微风",
+ "wind5":"微风",
+ "wind6":"微风",
+ //风速级别描述
+ "fx1":"北风",
+ "fx2":"微风",
+ "fl1":"3-4级转小于3级",
+ "fl2":"小于3级",
+ "fl3":"小于3级",
+ "fl4":"小于3级",
+ "fl5":"小于3级",
+ "fl6":"小于3级",
+ //今天穿衣指数;
+ "index":"冷",
+ "index_d":"天气冷，建议着棉衣、皮夹克加羊毛衫等冬季服装。年老体弱者宜着厚棉衣或冬大衣。",
+ //48小时穿衣指数
+ "index48":"冷",
+ "index48_d":"天气冷，建议着棉衣、皮夹克加羊毛衫等冬季服装。年老体弱者宜着厚棉衣或冬大衣。",
+ //紫外线及48小时紫外线
+ "index_uv":"弱",
+ "index48_uv":"弱",
+ //洗车
+ "index_xc":"适宜",
+ //旅游
+ "index_tr":"一般",
+ //舒适指数
+ "index_co":"较不舒适",
+
+
+ "st1":"1",
+ "st2":"-8",
+ "st3":"2",
+ "st4":"-4",
+ "st5":"5",
+ "st6":"-5",
+ //晨练
+ "index_cl":"较不宜",
+ //晾晒
+ "index_ls":"基本适宜",
+ //过敏
+ "index_ag":"极不易发"}}
+
+
+
+
+
+
+获取省级代码：http://www.weather.com.cn/data/list3/city.xml?level=1
+获取城市代码(比如安徽是22)：http://www.weather.com.cn/data/list3/city22.xml?level=2
+获取区域代码（比如安庆是2206）：http://www.weather.com.cn/data/list3/city2206.xml?level=3
+获取到安徽省安庆市望江县的代码是220607
+然后去加上中国代码请求URL：http://m.weather.com.cn/data/101220607.html
+就可以获取当地天气。
+
+另外再给几个有用的探索得到的URL：
+天气 FLASH实况：http://flash.weather.com.cn/sk2/101220607.xml
+实况FLASH：http://flash.weather.com.cn/sk2/shikuang.swf?id=101220607
+
+三级选择菜单（注明，这里有四个INPUT，其中有一个被隐藏了，可用FIREFOX改下源代码查看）：http://www.weather.com.cn/static/custom/search3.htm
+实时天气（很有用哦）：http://www.weather.com.cn/data/sk/101220607.html
+
+//广州
+
+
+2. 图片接口 http://m.weather.com.cn/img/c0.gif http://m.weather.com.cn/img/b0.gif http://www.weather.com.cn/m/i/weatherpic/29x20/d0.gif http://www.weather.com.cn/m2/i/icon_weather/29x20/n00.gif 这个图就是天气现象0（晴）的图片，其他天气现象的图片依此类推。c打头的图片是20*20像素的，b打头的是50*46像素的，d打头的是反白的图标，29*20像素，n打头的是夜间反白图标，29*20像素，注意这里的文件名是两位数字！
+
+
+
+通过城市名称去的cityid，api如下：
+“http://toy.weather.com.cn/SearchBox/searchBox?callback=jsonp1342857491709&_=1342857620727&language=zh&keyword=”+城市名称
+
+这里城市名称可以使中文也可以是拼音，不过只支持中国范围内的城市；如果中文城市名的话需要进行URLEncoder进行编码。
+以上海示例，得到jsonp数据如下：
+jsonp1342857491709({"p":[{"n":"上海","i":"shanghai","t":"p"}],"i":[{"n":"上海","d":"上海","i":"101020100","t":"i"}]});
+其中“i”:"101020100"就是cityid了，然后使用LZ听过的API进行天气查询。
+
+
+
+
+
+
+
+
+
+
+
+
